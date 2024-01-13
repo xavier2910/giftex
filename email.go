@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"net/smtp"
 	"os"
 )
@@ -17,4 +18,14 @@ func authorize() (auth smtp.Auth, sender *string, err error) {
 		return nil, nil, errors.New("no sender email set. try `export EMAIL_SENDER=sendersemail`")
 	}
 	return smtp.PlainAuth("", sndr, pass, "smtp.gmail.com"), &sndr, nil
+}
+
+func email(recipient, giver person, auth smtp.Auth, sender string) error {
+
+	to := []string{giver.Email}
+	msg := []byte(fmt.Sprintf("To: %s\r\nSubject: Christmas assignment\r\nYou are getting a gift for %s.", giver.Email, recipient.Name))
+
+	err := smtp.SendMail("smtp.gmail.com:587", auth, sender, to, msg)
+
+	return err
 }

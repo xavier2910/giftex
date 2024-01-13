@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"net/smtp"
 	"os"
 	"time"
 
@@ -95,14 +94,4 @@ func genNames(people []person) (givingMap map[person]person) {
 	}
 
 	return
-}
-
-func email(recipient, giver person, auth smtp.Auth, sender string) error {
-
-	to := []string{giver.Email}
-	msg := []byte(fmt.Sprintf("To: %s\r\nSubject: Christmas assignment (actual)\r\nYou are getting a gift for %s. This is no drill.", giver.Email, recipient.Name))
-
-	err := smtp.SendMail("smtp.gmail.com:587", auth, sender, to, msg)
-
-	return err
 }
