@@ -60,10 +60,10 @@ func run() error {
 			fmt.Printf("emailing %s... \n", g.Name)
 			err := email(r, g, auth, *sender)
 			if err != nil {
-				fmt.Printf("ERROR emailing %s. see end of output for details", g.Name)
+				fmt.Printf("ERROR emailing %s. See end of output for details.\n", g.Name)
 				return err
 			} else {
-				fmt.Printf("OK, emailed %s", g.Name)
+				fmt.Printf("OK, emailed %s.\n", g.Name)
 				return nil
 			}
 		})
