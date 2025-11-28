@@ -23,9 +23,9 @@ func authorize() (auth smtp.Auth, sender *string, err error) {
 func email(recipient, giver person, auth smtp.Auth, sender string) error {
 
 	to := []string{giver.Email}
-	msg := fmt.Appendf([]byte("To: %s\r\nSubject: Christmas assignment\r\nYou are getting a gift for %s."), giver.Email, recipient.Name)
+	msg := fmt.Sprintf("To: %s\r\nSubject: Christmas assignment\r\nYou are getting a gift for %s.", giver.Email, recipient.Name)
 
-	err := smtp.SendMail("smtp.gmail.com:587", auth, sender, to, msg)
+	err := smtp.SendMail("smtp.gmail.com:587", auth, sender, to, []byte(msg))
 
 	return err
 }
